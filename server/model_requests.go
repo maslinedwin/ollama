@@ -135,9 +135,9 @@ func (s *ModelRequestStore) load() error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	for _, req := range response.Requests {
-		r := req
-		s.requests[req.ID] = &r
+	for i := range response.Requests {
+		req := response.Requests[i]
+		s.requests[req.ID] = &req
 	}
 
 	slog.Debug("loaded model requests", "path", s.filepath, "count", len(s.requests))
